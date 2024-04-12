@@ -7,8 +7,8 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: '*', // Ganti dengan URL aplikasi Next.js Anda
-        method: ['GET', 'POST']// beberapa browser lama memerlukan ini
+        origin: 'https://learn-management-system-one.vercel.app',
+        credentials: true
       }
 });
 
