@@ -22,6 +22,7 @@ app.use(cors());
 
 io.on('connection', (socket) => {
     // Mendengarkan pesan dari klien
+    console.info(socket.id + ' connected')
     socket.on('pesanDariKlien', (body) => {
         // Mengirim pesan kembali hanya ke pengirim
         const data = { count: body.count + 1, chapter: body.chapter }
