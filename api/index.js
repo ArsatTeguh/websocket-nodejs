@@ -8,30 +8,26 @@ const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
         origin: 'https://learn-management-system-one.vercel.app',
+        // origin: 'http://localhost:3000',
         credentials: true
       }
 });
-
-app.get('/', (req, res) => {
-  res.send('<h1>Hello world</h1>');
-});
-
 
 app.use(cors());
 
 
 io.on('connection', (socket) => {
     // Mendengarkan pesan dari klien
-    console.info(socket.id + ' connected')
     socket.on('pesanDariKlien', (body) => {
         // Mengirim pesan kembali hanya ke pengirim
         const data = { count: body.count + 1, chapter: body.chapter }
-        io.to(socket.id).emit('pesanDariServer', data);
+       return io.to(socket.id).emit('pesanDariServer', data);
     });
 
     
     socket.on('joinRoom', (data) => {
-      socket.join(data.currentVideo);
+      console.info(socket.id + ' join room')
+      return socket.join(data.currentVideo);
     });
 
     socket.on('message', (data) => {
