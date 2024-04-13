@@ -7,10 +7,9 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: 'https://learn-management-system-one.vercel.app',
-        // origin: 'http://localhost:3000',
-        credentials: true
-      }
+      origin: process.env.NODE_ENV === 'production' ? 'https://learn-management-system-one.vercel.app' : 'http://localhost:3000',
+      credentials: true
+    }
 });
 
 app.use(cors());
