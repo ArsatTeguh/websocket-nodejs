@@ -17,13 +17,6 @@ app.use(cors());
 
 io.on('connection', (socket) => {
     // Mendengarkan pesan dari klien
-    socket.on('pesanDariKlien', (body) => {
-        // Mengirim pesan kembali hanya ke pengirim
-        const data = { count: body.count + 1, chapter: body.chapter }
-       return io.to(socket.id).emit('pesanDariServer', data);
-    });
-
-    
     socket.on('joinRoom', (data) => {
       console.info(socket.id + ' join room')
       return socket.join(data.currentVideo);
